@@ -1,0 +1,11 @@
+{
+  "test": {
+    "schema": {
+      "id": "INTEGER",
+      "name": "STRING",
+      "volume": "FLOAT"
+    },
+    "compression": "bz2",
+    "partition_key": null
+  }
+}
