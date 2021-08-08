@@ -1,0 +1,1 @@
+export STAGGER_DATA="/home/yauheni/PyCharmProjects/stagger/data"

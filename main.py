@@ -1,16 +1,33 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from actions.worker import Worker
+from parser.parser import Parser
+import os
+import argparse
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def args_parser() -> object:
+    parser = argparse.ArgumentParser()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    parser.add_argument('--ds', dest='datasets')
+
+    return parser.parse_args()
+
+
+def main():
+    os.environ.get("STAGGER_DATA")
+    path_data = "/home/yauheni/PyCharmProjects/stagger/data"
+    path_meta = "/home/yauheni/PyCharmProjects/stagger/metadata"
+
+    args = args_parser()
+
+    parser_obj = Parser(dataset_str=args.datasets, path=path_meta)
+    metadata_dict = parser_obj.get_metadata()
+
+    compressor_obj = Worker(path=path_data)
+
+    for dataset, metadata in metadata_dict.items():
+        compressor_obj.init_dataset(dataset=dataset, metadata_dict=metadata)
+        compressor_obj.compress_dataset(dataset=dataset)
+
+
+if __name__ == "__main__":
+    main()
