@@ -4,8 +4,7 @@
     "name": "STRING",
     "volume": "FLOAT"
   },
-  "compression": "bz2",
+  "compression": "gzip",
   "partition_key": null,
-  "path": "/home/yauheni/Downloads/preview.csv",
-  "class": "CSV"
+  "path": "/home/yauheni/Downloads/preview.csv"
 }
