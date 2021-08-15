@@ -1,6 +1,7 @@
 from actions.worker import Worker
 from parser.parser import Parser
 import os
+import time
 import argparse
 
 
@@ -22,11 +23,14 @@ def main():
     parser_obj = Parser(dataset_str=args.datasets, path=path_meta)
     metadata_dict = parser_obj.get_metadata()
 
-    compressor_obj = Worker(path=path_data)
+    worker_obj = Worker(path=path_data)
 
     for dataset, metadata in metadata_dict.items():
-        compressor_obj.init_dataset(dataset=dataset, metadata_dict=metadata)
-        compressor_obj.compress_dataset(dataset=dataset)
+        t1 = time.time()
+        worker_obj.init_dataset(dataset=dataset, metadata_dict=metadata)
+        worker_obj.compress_dataset(dataset=dataset)
+
+        print(time.time() - t1)
 
 
 if __name__ == "__main__":

@@ -17,16 +17,27 @@ logger = Logging(name=__name__).get_logger()
 
 
 class Compressor(ABC):
-    def __init__(self, path):
+    def __init__(self, path: str, file_name: str, ext: str):
         self.path = path
+        self.file_name = file_name
+        self.ext = ext
 
     @abstractmethod
-    def write(self, file_name: str, ext: str) -> None:
+    def close(self) -> None:
+        pass
+
+    @abstractmethod
+    def write(self, data: list) -> None:
         pass
 
 
 class BZ2(Compressor):
-    def write(self, file_name: int, data: iter, ext: str = "bz2"):
-        with bz2.open("{}/{}.{}".format(self.path, file_name, ext), "wb") as comp_file:
-            for row in data:
-                comp_file.write(row)
+    def __init__(self, path: str, file_name: str, ext: str = "bz2"):
+        super().__init__(path, file_name, ext)
+        self.compressor_obj = bz2.BZ2File("{}/{}.{}".format(self.path, self.file_name, self.ext), "wb")
+
+    def close(self):
+        self.compressor_obj.close()
+
+    def write(self, data: object):
+        self.compressor_obj.write(data)
