@@ -1,11 +1,22 @@
 {
   "schema": {
-    "id": "INTEGER",
-    "name": "STRING",
-    "volume": "FLOAT"
+    "Region": "STRING",
+    "Country": "STRING",
+    "Item Type": "STRING",
+    "Sales Channel": "STRING",
+    "Order Priority": "STRING",
+    "Order Date": "STRING",
+    "Order ID": "INTEGER",
+    "Ship Date": "STRING",
+    "Units Sold": "INTEGER",
+    "Unit Price": "FLOAT",
+    "Unit Cost": "FLOAT",
+    "Total Revenue": "FLOAT",
+    "Total Cost": "FLOAT",
+    "Total Profit": "FLOAT"
   },
-  "compression": "bz2",
+  "compression": "BZ2",
   "partition_key": null,
-  "path": "/home/yauheni/Downloads/preview.csv",
+  "path": "/home/yauheni/Downloads/test.csv",
   "class": "CSV"
 }
